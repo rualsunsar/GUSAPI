@@ -73,15 +73,4 @@ const ArticleModel = sequelize.define('article', {
   }
 })
 
-ArticleModel.getListTree = async function(where = {}) {
-  const articles = await ArticleModel.findAll({
-    where: where,
-    order: [['sort', 'DESC']]
-  })
-  const articlesArr = articles.map(function(item) {
-    return item.get({ plain: true })
-  })
-  return tools.getTreeData(articlesArr, null, 'article_id')
-}
-
 module.exports = ArticleModel

@@ -1,16 +1,21 @@
 const express = require('express')
 const router = express.Router()
 const ArticleModel = require('../model/articles')
-const Sequelize = require('sequelize')
+// const Sequelize = require('sequelize')
 // const Op = Sequelize.Op
 
 router.get('/list', (req, res, next) => {
-    ArticleModel.getListTree(req.query)
-    .then(function(articleTree) {
+    ArticleModel.findAll({
+      where: req.query
+    }).then(function(articles) {
+      const data = {
+        articles: articles,
+        count: articles ? articles.length : 0
+      }
       return res.json({
         code: 20000,
         message: '获取成功',
-        data: articleTree || []
+        data: data
       })
     })
 })
@@ -51,7 +56,7 @@ router.post('/edit', (req, res, next) => {
     return res.json({
       code: 20000,
       message: '修改成功',
-      data: menu
+      data: article
     })
   })
 })

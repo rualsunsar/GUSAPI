@@ -7,6 +7,7 @@ const userRouter = require('./router/user')
 const roleRouter = require('./router/role')
 const menuRouter = require('./router/menu')
 const logRouter = require('./router/user-log')
+const articleRouter = require('./router/article')
 
 const history = require('connect-history-api-fallback')
 app.use(express.static(path.join(__dirname, 'dist')))
@@ -37,6 +38,7 @@ app.use('/user', userRouter)
 app.use('/user-log', logRouter)
 app.use('/role', roleRouter)
 app.use('/menu', menuRouter)
+app.use('/article', articleRouter)
 
 // 配置服务端口
 const port = 8002
