@@ -132,8 +132,9 @@ INSERT INTO `users_roles` VALUES (14, 3, 3, '2020-05-24 11:19:35');
 DROP TABLE IF EXISTS `articles`;
 CREATE TABLE `articles`  (
   `article_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标题',
-  `subtitle` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '副标题',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标题',
+  `subtitle` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '副标题',
+  `sort` int(11) NOT NULL DEFAULT 0 COMMENT '排序',
   `logoS` varchar(255) DEFAULT NULL COMMENT '小图',
   `logoM` varchar(255) DEFAULT NULL COMMENT '中图',
   `logoL` varchar(255) DEFAULT NULL COMMENT '大图',
@@ -153,6 +154,6 @@ CREATE TABLE `articles`  (
 -- ----------------------------
 -- Records of articles
 -- ----------------------------
-INSERT INTO `articles` VALUES (1, '测试标题', '测试副标题', '', '', '', 'https://www.baidu.com', '测试普通文本', '测试富文本', '测试作者', '测试来源', 0, 0, '2020-05-25 21:48:26', '2020-05-25 20:48:26', '2020-05-16 21:15:43');
+INSERT INTO `articles` VALUES (1, '测试标题', '测试副标题', 1, '', '', '', 'https://www.baidu.com', '测试普通文本', '测试富文本', '测试作者', '测试来源', 0, 0, '2020-05-25 21:48:26', '2020-05-25 20:48:26', '2020-05-16 21:15:43');
 
 SET FOREIGN_KEY_CHECKS = 1;
