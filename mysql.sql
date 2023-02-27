@@ -126,4 +126,33 @@ CREATE TABLE `users_roles`  (
 INSERT INTO `users_roles` VALUES (1, 1, 1, '2020-05-16 21:15:03');
 INSERT INTO `users_roles` VALUES (14, 3, 3, '2020-05-24 11:19:35');
 
+-- ----------------------------
+-- Table structure for articles
+-- ----------------------------
+DROP TABLE IF EXISTS `articles`;
+CREATE TABLE `articles`  (
+  `article_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标题',
+  `subtitle` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '副标题',
+  `logoS` varchar(255) DEFAULT NULL COMMENT '小图',
+  `logoM` varchar(255) DEFAULT NULL COMMENT '中图',
+  `logoL` varchar(255) DEFAULT NULL COMMENT '大图',
+  `link` varchar(255) DEFAULT NULL COMMENT '链接',
+  `content` mediumtext,
+  `richtext` mediumtext,
+  `author` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作者',
+  `source` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '来源',
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '状态',
+  `deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
+  `published_time` datetime(0) NULL DEFAULT NULL COMMENT '发布时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`article_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of articles
+-- ----------------------------
+INSERT INTO `articles` VALUES (1, '测试标题', '测试副标题', '', '', '', 'https://www.baidu.com', '测试普通文本', '测试富文本', '测试作者', '测试来源', 0, 0, '2020-05-25 21:48:26', '2020-05-25 20:48:26', '2020-05-16 21:15:43');
+
 SET FOREIGN_KEY_CHECKS = 1;

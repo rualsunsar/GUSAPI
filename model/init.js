@@ -6,7 +6,8 @@ const sequelize = new Sequelize(
   'Sar621214#', // 密码
   {
     'dialect': 'mysql', // 数据库类型
-    'host': '124.222.91.249', // ip
+    // 'host': '124.222.91.249', // 正式库ip
+    'host': 'localhost', // 本地库ip
     'port': 3306, // 端口
     define: {
       timestamps: false
