@@ -41,6 +41,9 @@ router.post('/edit', (req, res, next) => {
   delete req.body.article_id
   const data = req.body
   data.update_time = new Date()
+  if(data.status == 1) {
+    data.published_time = new Date()
+  }
   ArticleModel.update(data, {
     where: {
         article_id: req.query.article_id || 0
