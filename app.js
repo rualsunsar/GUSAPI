@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
 const app = express()
+// 导入cors解决跨域问题
+const cors = require('cors')
 const expressJwt = require('express-jwt')
 const bodyParser = require('body-parser')
 const userRouter = require('./router/user')
@@ -12,6 +14,9 @@ const articleRouter = require('./router/article')
 const history = require('connect-history-api-fallback')
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(history())
+
+// 配置cors中间件，解决跨域问题
+app.use(cors())
 
 app.use(expressJwt({
   secret: 'bigfool.cn' // 签名的密钥 或 PublicKey
