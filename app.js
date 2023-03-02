@@ -13,6 +13,7 @@ const articleRouter = require('./router/article')
 
 const history = require('connect-history-api-fallback')
 app.use(express.static(path.join(__dirname, 'dist')))
+app.use('/public',express.static('public'))
 app.use(history())
 
 // 配置cors中间件，解决跨域问题
