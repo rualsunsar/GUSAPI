@@ -9,6 +9,7 @@ const sequelize = new Sequelize(
     'host': '124.222.91.249', // 正式库ip
     'host': 'localhost', // 本地库ip
     'port': 3306, // 端口
+    dialect: 'mysql',
     define: {
       timestamps: false
     },
