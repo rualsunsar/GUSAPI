@@ -4,17 +4,19 @@ const app = express()
 // 导入cors解决跨域问题
 const cors = require('cors')
 const expressJwt = require('express-jwt')
+const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const userRouter = require('./router/user')
 const roleRouter = require('./router/role')
 const menuRouter = require('./router/menu')
 const logRouter = require('./router/user-log')
 const articleRouter = require('./router/article')
+const webaApiRouter = require('./router/webApi')
 
-const history = require('connect-history-api-fallback')
+// const history = require('connect-history-api-fallback')
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use('/public',express.static('public'))
-app.use(history())
+// app.use(history())
 
 // 配置cors中间件，解决跨域问题
 app.use(cors())
@@ -22,7 +24,11 @@ app.use(cors())
 app.use(expressJwt({
   secret: 'bigfool.cn' // 签名的密钥 或 PublicKey
 }).unless({
-  path: ['/', '/user/login'] // 指定路径不经过 Token 解析
+  path: [
+    '/', 
+    '/user/login', 
+    { url: /^\/webApi\/.*/, methods: ['GET', 'POST'] },
+  ] // 指定路径不经过 Token 解析
 }))
 
 app.use(bodyParser.urlencoded({
@@ -31,7 +37,13 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json())
 
+// 自定义日志格式
+const myLogFormat = ':method :url :status :response-time ms - :res[content-length]';
+
+app.use(morgan(myLogFormat))
+
 app.use(function(err, req, res, next) {
+  console.log('err',err)
   if (err.name === 'UnauthorizedError') {
     res.status(401).send('token已失效')
   } else {
@@ -45,6 +57,7 @@ app.use('/user-log', logRouter)
 app.use('/role', roleRouter)
 app.use('/menu', menuRouter)
 app.use('/article', articleRouter)
+app.use('/webApi', webaApiRouter)
 
 // 配置服务端口
 const port = 8002
