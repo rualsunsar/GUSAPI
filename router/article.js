@@ -90,8 +90,8 @@ router.get('/get', (req, res, next) => {
   })
 })
 
-router.post('/uploadImg', (req, res, next) => {
-  console.log('图片上传')
+router.post('/uploadLogoL', (req, res, next) => {
+  console.log('LogoL图片上传')
   let form = new multiparty.Form()
   form.uploadDir = './public/img'
   form.parse(req, function (err, fields, files) {
